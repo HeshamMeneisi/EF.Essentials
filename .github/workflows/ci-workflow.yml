@@ -1,0 +1,65 @@
+name: Build-Test-Deploy
+
+on: [ push ]
+
+env:
+  DOTNET_VER: 5.0.100
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{env.DOTNET_VER}}
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+  run-unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{env.DOTNET_VER}}
+
+      - name: Run Unit Tests
+        run: dotnet test
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [ build, run-unit-tests ]
+
+    outputs:
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{env.DOTNET_VER}}
+
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          MANAGE_PACKAGES_TOKEN: ${{ secrets.MANAGE_PACKAGES_TOKEN }}
+          PACKAGE_NAME: GenericCompany.Common
+          GITHUB_USER: heshammeneisi
+        with:
+          extra_plugins: |
+            @semantic-release/git
+            @semantic-release/exec
+            @semantic-release/changelog
