@@ -39,7 +39,7 @@ namespace EF.Essentials
                 options.JsonSerializerOptions.Converters.Add(converter);
             });
             services.ConfigureSwagger();
-            services.RegisterBaseWorkers();
+            services.RegisterBaseWorkers(Configuration);
             HealthCheckBuilder = services.ConfigureHealthChecks(Configuration);
         }
 
