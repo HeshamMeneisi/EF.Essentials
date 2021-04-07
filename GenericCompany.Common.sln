@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCompany.Common", "GenericCompany.Common\GenericCompany.Common.csproj", "{4A3CE5B4-7716-409D-A3DA-B2CF2563D049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.Essentials", "EF.Essentials\EF.Essentials.csproj", "{4A3CE5B4-7716-409D-A3DA-B2CF2563D049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCompany.Common.UnitTests", "GenericCompany.Common.UnitTests\GenericCompany.Common.UnitTests.csproj", "{1A3639F4-07BA-4DB8-B410-0CFBBD30A928}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.Essentials.UnitTests", "EF.Essentials.UnitTests\EF.Essentials.UnitTests.csproj", "{1A3639F4-07BA-4DB8-B410-0CFBBD30A928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

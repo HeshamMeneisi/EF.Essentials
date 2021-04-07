@@ -56,7 +56,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           MANAGE_PACKAGES_TOKEN: ${{ secrets.MANAGE_PACKAGES_TOKEN }}
-          PACKAGE_NAME: GenericCompany.Common
+          PACKAGE_NAME: EF.Essentials
           GITHUB_USER: heshammeneisi
         with:
           extra_plugins: |

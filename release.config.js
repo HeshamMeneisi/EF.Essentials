@@ -10,7 +10,6 @@ class SemanticReleaseError extends Error {
 }
 
 const PACKAGE_NAME = process.env.PACKAGE_NAME;
-const GH_TOKEN = process.env.GH_TOKEN;
 const MANAGE_PACKAGES_TOKEN = process.env.MANAGE_PACKAGES_TOKEN;
 const GITHUB_USER = process.env.GITHUB_USER;
 
