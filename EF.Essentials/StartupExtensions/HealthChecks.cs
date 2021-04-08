@@ -16,11 +16,13 @@ namespace EF.Essentials.StartupExtensions
 {
     public static class HealthChecks
     {
+        private static HealthCheckConfig _config;
+
         public static IHealthChecksBuilder ConfigureHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
-            var config = configuration.GetSection("HealthCheckConfig").Get<HealthCheckConfig>();
+            _config = configuration.GetSection("HealthCheckConfig").Get<HealthCheckConfig>();
 
-            MemoryCheck.Threshold = config.MemoryUsageThresholdMb;
+            MemoryCheck.Threshold = _config.MemoryCheckConfig.MemoryUsageThresholdMb;
 
             var context = services
                 .AddHealthChecks()
@@ -31,7 +33,7 @@ namespace EF.Essentials.StartupExtensions
 
         public static void ConfigureHealthCheckEndpoint(this IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapHealthChecks("/health", new HealthCheckOptions
+            endpoints.MapHealthChecks(_config.Endpoint, new HealthCheckOptions
             {
                 ResponseWriter = WriteResponse,
                 AllowCachingResponses = false
