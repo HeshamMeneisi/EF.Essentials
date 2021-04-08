@@ -25,8 +25,12 @@ namespace EF.Essentials.StartupExtensions
             MemoryCheck.Threshold = _config.MemoryCheckConfig.MemoryUsageThresholdMb;
 
             var context = services
-                .AddHealthChecks()
-                .AddCheck<MemoryCheck>(nameof(MemoryCheck));
+                .AddHealthChecks();
+
+            if (_config.MemoryCheckConfig.Enabled)
+            {
+                context = context.AddCheck<MemoryCheck>(nameof(MemoryCheck));
+            }
 
             return context;
         }
